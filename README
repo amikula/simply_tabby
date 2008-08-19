@@ -1,0 +1,60 @@
+SimplyTabby
+===========
+
+This plugin takes advantage of a Rails 2.0 feature, 'Multiple Controller View Paths'.
+
+tab·by –noun:
+a spiteful female gossip or tattler.
+
+SimplyTabby is a plugin which collects system information, only to turn around and
+"be a tabby".
+
+This plugin renders system information in <!-- HTML comments -->.
+
+To Add/remove additional system information.  Add the following to environment.rb
+where :type is either :crypt or :public.  Items under :crypt will be encrypted, so
+the general public cannot view their contents.  See section A. in appendix for
+decryption instructions.
+  SimplyTabby.remove_system_information(:type, :environment)
+  SimplyTabby.add_system_information(:type, {:database_adapter => ActiveRecord::Base.configurations[RAILS_ENV]['adapter']})
+
+Example
+=======
+
+To use SimplyTabby, include the following code in your layout just before </body>.
+  <%= render :partial => '/simply_tabby/tabby' %>
+
+Dependencies
+============
+
+Ezcrypto rubygem.
+
+Appendix
+========
+
+A. Decryption:
+
+Run the following task to decrypt SimplyTabby's OpenSSL object.
+
+  > rake tabby:decrypt
+	(in /Users/john/svn/topics)
+	INFO: Paste key -- terminate with '^D'
+	jB6m1h2x8BhSHXTYRRYHlbUCcgPZqxKqJ4QmuprIX4cWS0ColecYtKGqEhL9
+	s5D9Bvt2KLPoxmLWYNWwWrRzT8Rfw8Mc0IVMUqDHWHMmvPvt9FV/ihif9MQS
+	AnfGyFXNxfwswZUI0L+xGwbDXFfsSPpLpEq2lMvxN8GBMyDB/3BtPOd+XKua
+	FoyWU/+D0w+hlIzY5C9Dc6ieSyoKeh9X5XtWf9pnDRN8AhHNgEle2rLnUwkK
+	+zN+pFxHe69o+E3J
+	================================================================================
+	ip_address: 127.0.0.1
+	rails_version: 2.0.1
+	ruby_platfom: universal-darwin9.0
+	ruby_version: 1.8.6
+	hostname: emopop
+	database_adapter: mysql
+	rubygems_version: 0.9.4
+	database_schema_version: 20
+
+TODO
+====
+
+Copyright (c) 2008 John Dewey <john@dewey.ws>, released under the MIT license
