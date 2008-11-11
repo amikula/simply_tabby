@@ -54,7 +54,4 @@ Run the following task to decrypt SimplyTabby's OpenSSL object.
 	rubygems_version: 0.9.4
 	database_schema_version: 20
 
-TODO
-====
-
-Copyright (c) 2008 John Dewey <john@dewey.ws>, released under the MIT license
+Copyright (c) 2008 Los Angeles Times, released under the MIT license
