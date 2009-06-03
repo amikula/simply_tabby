@@ -1,8 +1,13 @@
 require 'rubygems'
 require 'socket'
-require 'ezcrypto'
+
 
 class SimplyTabby
+
+  NO_CRYPTO = Gem::SourceIndex.from_installed_gems.search(Gem::Dependency.new('ezcrypto','=0.7.2')).empty?
+  unless NO_CRYPTO
+    require 'ezcrypto'
+  end
 
   REVISION_FILE = File.join(File.dirname(__FILE__), '../../../../', 'REVISION')
   PASS_PHRASE   = "xx"
@@ -21,7 +26,9 @@ class SimplyTabby
   end
   
   def self.display_crypt_system_information
-    EzCrypto::Key.with_password(PASS_PHRASE, SALT).encrypt64(@@data[:crypt].map { |k, v|  "#{k}: #{v}\n"}.join) rescue nil
+    unless NO_CRYPTO
+      EzCrypto::Key.with_password(PASS_PHRASE, SALT).encrypt64(@@data[:crypt].map { |k, v|  "#{k}: #{v}\n"}.join) rescue nil
+    end
   end
 
   ##

@@ -27,7 +27,7 @@ To use SimplyTabby, include the following code in your layout just before </body
 Dependencies
 ============
 
-Ezcrypto rubygem.
+Ezcrypto rubygem version 0.7.2.  If you do not have ezcrypto installed the encrypted section will not show.
 
 Appendix
 ========
