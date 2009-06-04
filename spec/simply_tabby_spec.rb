@@ -8,7 +8,7 @@ describe SimplyTabby, "revision_number class method" do
     @file.should_receive(:readline).and_return('r123')
     SimplyTabby.revision_number.should be_eql('r123')
   end
-  
+
   it "should _not return revision number" do
     File.should_receive(:exist?).and_return(false)
     SimplyTabby.revision_number.should be_eql('No revision found')
@@ -17,7 +17,7 @@ end
 
 describe SimplyTabby, "display_system_information class method" do
   it "should display system information and return a hash" do
-    SimplyTabby.display_system_information.should be_an_instance_of(Hash) 
+    SimplyTabby.display_system_information.should be_an_instance_of(Hash)
   end
 end
 
