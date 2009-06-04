@@ -1,8 +1,8 @@
 <!-- SimplyTabby
-		
 <%= SimplyTabby.display_system_information[:public].map { |k, v| "#{k}: #{v}" }.join("\n") %>
-mongrel_port: <%= Rails::MONGREL_PORT %>
-		
+<% if defined? ::APPSERVER_WORKER -%>
+appserver_worker: <%= ::APPSERVER_WORKER %>
+<% end -%>
+
 <%= SimplyTabby.display_crypt_system_information %>
-	
 -->

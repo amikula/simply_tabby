@@ -7,8 +7,9 @@ end
 ##
 # Hack to obtain the mongrel port.
 if defined? Mongrel::HttpServer
-  ObjectSpace.each_object(Mongrel::HttpServer) { |i| @port = i.port }	
-  Rails::MONGREL_PORT = @port
-else
-  Rails::MONGREL_PORT = "Mongrel port not defined."
+  ObjectSpace.each_object(Mongrel::HttpServer) {|x| @port = x.port}
+  ::APPSERVER_WORKER = @port
+elsif(defined? Unicorn::HttpServer::Worker)
+  ObjectSpace.each_object(Unicorn::HttpServer::Worker) { |x| @worker_nr = x.nr }
+  ::APPSERVER_WORKER = @worker_nr
 end
