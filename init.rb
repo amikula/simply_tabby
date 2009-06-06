@@ -8,6 +8,6 @@ if defined? Mongrel::HttpServer
   ObjectSpace.each_object(Mongrel::HttpServer) {|x| @port = x.port}
   ::APPSERVER_WORKER = @port
 elsif(defined? Unicorn::HttpServer::Worker)
-  ObjectSpace.each_object(Unicorn::HttpServer::Worker) { |x| @worker_nr = x.nr }
+  ObjectSpace.each_object(Unicorn::HttpServer::Worker) {|x| @worker_nr = x.nr}
   ::APPSERVER_WORKER = @worker_nr
 end
