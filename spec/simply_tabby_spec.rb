@@ -36,16 +36,18 @@ describe SimplyTabby, "reload object" do
 
   describe SimplyTabby, "remove_system_information class method" do
     it "should remove one element and return public(hash.keys - 1)" do
+      SimplyTabby.display_system_information[:public].should have_key(:application_revision)
       SimplyTabby.remove_system_information(:public, :application_revision)
-      SimplyTabby.display_system_information[:public].keys.size.should == 1
+      SimplyTabby.display_system_information[:public].should_not have_key(:application_revision)
     end
   end
 
   load File.join(File.dirname(__FILE__), '../lib', 'simply_tabby.rb')
   describe SimplyTabby, "add_system_information class method" do
     it "should add one element and return public(hash.keys + 1)" do
+      SimplyTabby.display_system_information[:public].should_not have_key(:foo)
       SimplyTabby.add_system_information(:public, :foo => 1)
-      SimplyTabby.display_system_information[:public].keys.size.should == 3
+      SimplyTabby.display_system_information[:public].should have_key(:foo)
     end
   end
 end
