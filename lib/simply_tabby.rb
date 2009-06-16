@@ -51,7 +51,9 @@ class SimplyTabby
     buf << "appserver_worker: #{::APPSERVER_WORKER}\n" if defined? ::APPSERVER_WORKER
     buf << "\n"
 
-    buf << SimplyTabby.display_crypt_system_information(options) << "\n"
+    cryptinfo = SimplyTabby.display_crypt_system_information(options)
+    buf << cryptinfo << "\n" if cryptinfo
+
     buf << '-->' unless options[:no_comment]
 
     buf
