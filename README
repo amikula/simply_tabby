@@ -22,7 +22,7 @@ Example
 =======
 
 To use SimplyTabby, include the following code in your layout just before </body>.
-  <%= render :partial => '/simply_tabby/tabby' %>
+  <%= SimplyTabby.do_tell %>
 
 Dependencies
 ============

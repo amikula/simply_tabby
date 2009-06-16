@@ -23,10 +23,13 @@ class SimplyTabby
     @@data
   end
 
-  def self.display_crypt_system_information
+  def self.display_crypt_system_information(options={})
     unless NO_CRYPTO
-      EzCrypto::Key.with_password(PASS_PHRASE, SALT).encrypt64(@@data[:crypt].map { |k, v|  "#{k}: #{v}\n"}.join) rescue nil
+      info = @@data[:crypt].map { |k, v|  "#{k}: #{v}\n"}.join
+      options[:no_crypt] ? info : EzCrypto::Key.with_password(PASS_PHRASE, SALT).encrypt64(info)
     end
+  rescue
+    nil
   end
 
   ##
@@ -39,6 +42,19 @@ class SimplyTabby
   # Add additional system information to the hash.
   def self.add_system_information(type, opts={})
     @@data[type].merge!(opts)
+  end
+
+  def self.do_tell(options={})
+    buf = ""
+    buf << '<!-- SimplyTabby' << "\n" unless options[:no_comment]
+    buf << SimplyTabby.display_system_information[:public].map { |k, v| "#{k}: #{v}" }.join("\n") << "\n"
+    buf << "appserver_worker: #{::APPSERVER_WORKER}\n" if defined? ::APPSERVER_WORKER
+    buf << "\n"
+
+    buf << SimplyTabby.display_crypt_system_information(options) << "\n"
+    buf << '-->' unless options[:no_comment]
+
+    buf
   end
 
   ##
